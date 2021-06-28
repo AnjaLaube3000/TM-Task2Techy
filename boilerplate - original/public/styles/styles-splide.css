@@ -1,0 +1,186 @@
+/* Fonts */
+@font-face {
+  font-family: "BrandonGrotesqueWeb-Medium"; src:
+  url("//db.onlinewebfonts.com/t/5b15925f730447e503cfd467c0c91c3f.eot"); src:
+  url("//db.onlinewebfonts.com/t/5b15925f730447e503cfd467c0c91c3f.eot?#iefix") format("embedded-opentype"),
+  url("//db.onlinewebfonts.com/t/5b15925f730447e503cfd467c0c91c3f.woff2") format("woff2"),
+  url("//db.onlinewebfonts.com/t/5b15925f730447e503cfd467c0c91c3f.woff") format("woff"),
+  url("//db.onlinewebfonts.com/t/5b15925f730447e503cfd467c0c91c3f.ttf") format("truetype"),
+  url("//db.onlinewebfonts.com/t/5b15925f730447e503cfd467c0c91c3f.svg#BrandonGrotesqueWeb-Medium") format("svg");
+}
+
+@font-face {
+  font-family: "Omnes";
+  src: url("/fonts/Omnes.woff2") format("woff2"),
+       url("/fonts/Omnes.woff") format("woff");
+}
+
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+#both__sliders {
+  width: '100vw'!important;
+  display: flex;
+  flex-direction: row;
+}
+
+.splide__slide {
+  border: none;
+}
+
+/*  Image Slider  */
+#one {
+  height: 588px;
+  width: 60vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.splide__slide img{
+  max-width: 100%;
+  /* max-height: 100%;
+   */
+  height: auto;
+  object-fit: cover;
+}
+
+.is-active {
+  border: none!important;
+}
+
+/*  Text Slider  */
+#two {
+  width: 40vw;
+  background: black;
+  color: white;
+}
+
+.text {
+  padding: 117px 70px;
+}
+
+.text a {
+  text-decoration: none;
+  color: white;
+}
+
+.text a:visited {
+  color: white;
+}
+
+h2 {
+  font-family: "BrandonGrotesqueWeb-Medium", Verdana, sans-serif;
+  font-weight: 400;
+  font-size: 40px;
+  margin: 20px 0;
+  line-height: 46.3px;
+}
+
+p {
+  font-family: "Omnes", Verdana, sans-serif;
+  -webkit-text-size-adjust: 100%;
+  font-weight: 300;
+  font-size: 18px;
+  margin: 18px 0;
+  line-height: 27px;
+}
+
+span {
+  font-family: "BrandonGrotesqueWeb-Medium", Verdana, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+/*  Arrows/ Navigation  */
+#one .splide__arrows button {
+  height: 588px;
+  width: 20vw;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+
+#one .splide__arrows button:hover {
+  background-color: yellow;
+  border: none;
+  opacity: 0.8;
+  /* arrow function not in place */
+  /* position: absolute;
+  transform: translate(-50%,-50%);
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  border: 2px solid black;
+  border: none;
+  background-image: url('yellow-arrow-right.svg'); */
+}
+
+#one .splide__arrow--next {
+  display: none;
+}
+
+#two .splide__arrows button {
+  height: 588px;
+  width: 20vw;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
+}
+
+#two .splide__arrows button:hover {
+  background-color: yellow;
+  border: none;
+  opacity: 0.8;
+}
+
+#two .splide__arrow--prev {
+  display: none;
+}
+
+/*  responsiveness  */
+
+
+
+@media only screen and (max-width: 1150px) {
+  h2 {
+    font-size: 30px;
+    line-height: 1.12;
+  }
+
+  .text {
+    padding: 117px 30px;
+    word-wrap: break-word;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #both__sliders {
+    display: flex;
+    flex-direction: column;
+    /* width: 100%; */
+  }
+
+  #one {
+    width: 100%;
+  }
+
+  #two {
+    width: 100%;
+    height: 380px;
+  }
+
+  .text {
+    padding: 60px 30px;
+    word-wrap: break-word;
+  }
+}
