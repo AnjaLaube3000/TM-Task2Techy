@@ -18,13 +18,12 @@
 
 
 #carousel {
-  width: 800px;
-  height: 350px;
+padding-top: 30px;
 }
 
-.splide__slide {
+/* .splide__slide {
   height: 220px;
-}
+} */
 
 
 .splide {
