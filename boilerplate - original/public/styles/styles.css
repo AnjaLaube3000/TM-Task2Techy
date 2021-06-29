@@ -1,0 +1,41 @@
+/* @import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'; */
+
+body {
+  background-color: #080666!important;
+  color: #E5E5E5!important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.filepond--root {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  width: 380px;
+  margin-top: 50px;
+  cursor: pointer;
+}
+
+.filepond--item {
+  width: calc(50% - 0.5em);
+}
+
+@media (min-width: 30em) {
+  .filepond--item {
+    width: calc(50% - 0.5em);
+  }
+}
+
+@media (min-width: 50em) {
+  .filepond--item {
+    width: calc(33.33% - 0.5em);
+  }
+}
+
+.filepond--file-action-button {
+  cursor: pointer;
+}
+
+.filepond--drop-label {
+  cursor: pointer;
+}

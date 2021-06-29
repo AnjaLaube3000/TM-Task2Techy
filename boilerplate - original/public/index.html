@@ -1,10 +1,59 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Boilderplate App</title>
-</head>
-<body>
-  <h1>Boilerplate</h1>
-  <script src="/scripts/bundle.js"></script>
-</body>
-</html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Filter Carousel</title>
+
+    <!-- splide -->
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+    <link rel="stylesheet" href="styles/styles-splide.css">
+    <link rel="stylesheet" href="styles/splide.min.css">
+
+    <!-- filepond -->
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+
+  <!-- common css -->
+    <link rel="stylesheet"href='styles/styles.css'/>
+  </head>
+
+  <body>
+    <!-- <h1>Filter Carousel</h1> -->
+    <div id="carousel" class="splide">
+      <div class="splide__track">
+        <div class="splide__list">
+          <div class="splide__slide">
+            <p>Kleiderhaufen</p>
+          </div>
+          <div class="splide__slide">
+            <p>Kieselstein</p>
+          </div>
+          <div class="splide__slide">
+            <p>Kohlenschaufel</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="uploadArea">
+      <!-- THEORY: -->
+      <!--
+        Click "uplaod" button, so image will be uploaded:
+        1. Multiple effect run over image (3 times)
+        2. Images get added to carousel
+        3. at any point, images get pushed to a database? Is this necessary to download the image?
+        4. Hide Upload-Button
+        5. Show new button "Download"
+        6. Show second button "new image" to restart the loop
+      -->
+    </div>
+
+
+    <script src="/scripts/bundle.js"></script>
+  </body>
+
+  </html>
+
+
+  <!-- next step: click button and make image appear outside the preview window -->
