@@ -16,21 +16,16 @@
 } */
 
 
-html {
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-}
-
 
 #carousel {
   width: 800px;
   height: 350px;
 }
 
-/* .splide__slide {
-  width: '100vw'!important;
+.splide__slide {
+  height: 220px;
 }
-*/
+
 
 .splide {
   /* height: 588px; */

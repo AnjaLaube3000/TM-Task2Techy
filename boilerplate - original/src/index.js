@@ -113,10 +113,13 @@ document.addEventListener('DOMContentLoaded', () => {
   let basicOptions = {
     type: 'loop',
     perPage: 3,
+    perMove: 1,
     rewind: true,
     speed: 1000,
     autoplay: true,
     easing: 'cubic-bezier(.645,.045,.335,1)',
+    focus: 'center',
+    gap: 0.5,
     arrows: true,
     pagination: false,
     interval: 1000 * 5,
