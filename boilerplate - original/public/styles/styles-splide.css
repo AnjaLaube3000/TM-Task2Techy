@@ -24,7 +24,7 @@ html {
 
 #carousel {
   width: 800px;
-  height: 350px
+  height: 350px;
 }
 
 /* .splide__slide {
@@ -33,7 +33,7 @@ html {
 */
 
 .splide {
-  height: 588px;
+  /* height: 588px; */
   display: flex;
   justify-content: center;
   align-items: center;

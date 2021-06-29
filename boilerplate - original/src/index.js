@@ -15,7 +15,9 @@ FilePond.registerPlugin(
 const pond = FilePond.create({
   name: 'filepond',
   allowImagePreview: true,
-  imagePreviewMaxHeight: 100,
+  imagePreviewMaxHeight: 200,
+  allowProcess: true,
+  storeAsFile: true,
 
   //filter
   allowImageFilter: true,
@@ -40,8 +42,10 @@ const pond = FilePond.create({
     0.0,
     1,
     0,
-  ]
+  ],
+  credits: false
 })
+
 
 // Add it to the DOM
 const uploadArea = document.getElementById('uploadArea')
@@ -50,6 +54,30 @@ uploadArea.appendChild(pond.element)
 const uploadButton = document.createElement('button')
 uploadButton.innerHTML = 'Upload'
 uploadArea.appendChild(uploadButton)
+
+// THEORY
+// 1. click button - event handler:
+//     access image from pond and add to carousel
+
+const addImage = () => {
+  const image = document.getElementsByClassName('filepond--image-preview')[0]
+  const slide = document.getElementsByClassName('uploadAdrea')
+  slide.appendChild(image)
+}
+
+uploadButton.addEventListener ('click', () => {
+  addImage()
+
+
+  // const slideDiv = document.createElement('div')
+  // console.log(slideDiv)
+  // const slideEl = document.createElement('img')
+  // console.log(slideEl)
+  // slide.appendChild(slideDiv)
+  // slideDiv.appendChild(slideEl)
+  // slideEl.appendChild(image)
+})
+
 
 
 // How to save the image to localStorage??
@@ -80,7 +108,7 @@ loadImages()
 
 
 // carousel
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
 
   let basicOptions = {
     type: 'loop',
@@ -96,11 +124,10 @@ document.addEventListener('DOMContentLoaded', function () {
     pauseOnFocus: false,
     keyboard: false,
     drag: false
-  };
+  }
 
-  // var splide = new Splide('#splide').mount();
   let carousel = new Splide('#carousel', basicOptions);
-  carousel.mount();
+  carousel.mount()
 })
 
 
