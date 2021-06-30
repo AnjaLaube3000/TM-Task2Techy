@@ -21,13 +21,7 @@
 padding-top: 30px;
 }
 
-/* .splide__slide {
-  height: 220px;
-} */
-
-
 .splide {
-  /* height: 588px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,5 +32,17 @@ padding-top: 30px;
   border: none!important;
 }
 
+/*  arrows  */
+/* .splide__arrows {
+} */
+
+.splide__arrow--prev {
+  background-color: transparent;
+  border: none;
+}
+
+.splide__arrow--prev svg path{
+  color: lightcoral;
+}
 
 /*  responsiveness  */

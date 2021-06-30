@@ -45,7 +45,8 @@ const pond = FilePond.create({
   ],
   credits: false
 })
-
+// next instance
+//FilePond.create({ element: document.getElementById('hidden-div') })
 
 // Add it to the DOM
 const uploadArea = document.getElementById('uploadArea')
@@ -60,14 +61,17 @@ uploadArea.appendChild(uploadButton)
 //     access image from pond and add to carousel
 
 const addImage = () => {
-  const image = document.getElementsByClassName('filepond--image-preview')[0]
-  const slide = document.getElementsByClassName('uploadAdrea')
+  const image = document.querySelector('canvas')
+  const slide = document.getElementById('carousel-slide01')
+  if (!image) return
   slide.appendChild(image)
+
 }
 
 uploadButton.addEventListener ('click', () => {
   addImage()
-
+  const uploadArea = document.getElementById('uploadArea')
+  uploadArea.classList.add('hidden')
 
   // const slideDiv = document.createElement('div')
   // console.log(slideDiv)
@@ -121,8 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
     easing: 'cubic-bezier(.645,.045,.335,1)',
     focus: 'center',
     width: 900,
+    fixedHeight: '20rem',
     cover: true,
-    heightRatio: 0.5,
+    // heightRatio: 0.45,
     gap: 25,
     padding: {
       left: '3rem',
@@ -133,7 +138,8 @@ document.addEventListener('DOMContentLoaded', () => {
     pauseOnHover: false,
     pauseOnFocus: false,
     keyboard: false,
-    drag: false
+    drag: false,
+    accessibility: true
   }
 
   let carousel = new Splide('#carousel', basicOptions);

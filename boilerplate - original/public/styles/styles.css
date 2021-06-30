@@ -25,6 +25,18 @@ body {
   width: calc(50% - 0.5em);
 }
 
+.filepond--file-action-button {
+  cursor: pointer;
+}
+
+.filepond--drop-label {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none!important;
+}
+
 @media (min-width: 30em) {
   .filepond--item {
     width: calc(50% - 0.5em);
@@ -37,10 +49,3 @@ body {
   }
 }
 
-.filepond--file-action-button {
-  cursor: pointer;
-}
-
-.filepond--drop-label {
-  cursor: pointer;
-}
