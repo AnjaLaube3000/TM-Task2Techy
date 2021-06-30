@@ -18,7 +18,7 @@ const pond = FilePond.create({
   imagePreviewMaxHeight: 200,
   // allowProcess: true,
   // storeAsFile: true,
-  credits: false
+  credits: false,
 })
 
 // next instance
@@ -35,7 +35,7 @@ const pond1 = FilePond.create({
     0.0, 0.0, 0.0, 1, 0,
   ]
 })
-
+pond1.addFile(pond)
 
 const pond2 = FilePond.create({
   // element: document.getElementById('hidden-div2'),
@@ -50,6 +50,8 @@ const pond2 = FilePond.create({
     0.000,  0.000,  0.000,  1.000,  0.000
   ]
 })
+pond2.addFile(pond)
+
 const pond3 = FilePond.create({
   // element: document.getElementById('hidden-div3'),
   name: 'filter3',
@@ -63,14 +65,17 @@ const pond3 = FilePond.create({
     0.000,  0.000,  0.000,  1.000,  0.000
   ]
 })
+pond3.addFile(pond)
 
 
-
-// Add it to the DOM
+// Add uploadArea to the DOM
 const uploadArea = document.getElementById('uploadArea')
 uploadArea.appendChild(pond.element)
 // const hiddenArea = document.getElementById('hiddenArea')
 
+
+
+// Add upload Button to upload Area
 const uploadButton = document.createElement('button')
 uploadButton.innerHTML = 'Upload'
 uploadArea.appendChild(uploadButton)
@@ -78,29 +83,62 @@ uploadArea.appendChild(uploadButton)
 // THEORY
 // 1. click button -> event handler:
 //     Add pond to carousel
+// CHALLANGE
+// Add mutliple instances of pond to carousel
 
 const addImage = () => {
   const image = document.querySelector('canvas')
   const slide = document.createElement('div')
-  const slideList = document.getElementsByClassName('splide__list')
   slide.classList.add('splide__slide')
+  const slideList = document.getElementsByClassName('splide__list')[0]
   if (!image) return
   slide.appendChild(image)
   slideList.appendChild(slide)
-
 }
+
+//filters for original image
+const filters = []
+const addFilters = () => {
+  filters.push(pond1)
+  filters.push(pond2)
+  filters.push(pond3)
+  filters.forEach(() => {
+    addImage()
+  })
+}
+
+
 
 uploadButton.addEventListener ('click', () => {
   addImage()
+  addFilters()
+  const carousel = document.getElementById('carousel')
+  carousel.classList.remove('hidden')
   const uploadArea = document.getElementById('uploadArea')
   uploadArea.classList.add('hidden')
-  //show download button
-  const downloadButton = document.createElement('button')
-  dowmloadButton.innerHTML = 'Download Image'
-  uploadArea.appendChild(downloadButton)
-
+  //show download area
+  const downloadArea = document.getElementById('downloadArea')
+  downloadArea.classList.remove('hidden')
 })
 
+//restart programm --- Doenst work (pond needs to be restarted(preview image removed))
+const restartButton = document.getElementById('restart')
+
+const newPond = FilePond.create({
+  name: 'filepond',
+  allowImagePreview: true,
+  imagePreviewMaxHeight: 200,
+  // allowProcess: true,
+  // storeAsFile: true,
+  credits: false,
+})
+
+restartButton.addEventListener ('click', () => {
+  uploadArea.classList.remove('hidden')
+  uploadArea.appendChild(newPond)
+  const downloadArea = document.getElementById('downloadArea')
+  downloadArea.classList.add('hidden')
+})
 
 
 // How to save the image to localStorage??

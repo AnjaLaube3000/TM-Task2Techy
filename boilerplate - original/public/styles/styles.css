@@ -37,7 +37,7 @@ body {
   display: none!important;
 }
 
-#hidden-div1 {
+/* #hidden-div1 {
   display: none;
 }
 
@@ -47,7 +47,7 @@ body {
 
 #hidden-div3 {
   display: none;
-}
+} */
 
 
 @media (min-width: 30em) {
