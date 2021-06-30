@@ -21,10 +21,10 @@
 
   <body>
     <!-- <h1>Filter Carousel</h1> -->
-    <div id="carousel" class="splide">
+    <div id="carousel" class="splide hidden">
       <div class="splide__track">
         <div class="splide__list">
-          <div class="splide__slide">
+          <!-- <div class="splide__slide">
             <img src="images/drink1.jpeg" alt="picture of cocktail in fancy setting">
           </div>
           <div class="splide__slide">
@@ -35,11 +35,11 @@
           </div>
           <div class="splide__slide">
             <img src="images/drink5.jpeg" alt="picture of cocktail in fancy setting">
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
-    <div id="uploadArea">
+    <div id="uploadArea" class='m-250'>
       <!-- THEORY: -->
       <!--
         Click "uplaod" button, so image will be uploaded:
@@ -47,9 +47,17 @@
         2. Images get added to carousel
         3. at any point, images get pushed to a database? Is this necessary to download the image?
         4. Hide Upload-Button
+      -->
+    </div>
+    <div id="downloadArea" class='hidden m-80'>
+      <!--
         5. Show new button "Download"
         6. Show second button "new image" to restart the loop
       -->
+      <button>Download Image</button>
+      <!-- <a href=""> -->
+        <button id='restart' class='custom'>Add new Image</button>
+      <!-- </a> -->
     </div>
 
 
