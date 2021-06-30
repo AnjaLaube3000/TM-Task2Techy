@@ -16,55 +16,77 @@ const pond = FilePond.create({
   name: 'filepond',
   allowImagePreview: true,
   imagePreviewMaxHeight: 200,
-  allowProcess: true,
-  storeAsFile: true,
+  // allowProcess: true,
+  // storeAsFile: true,
+  credits: false
+})
+
+// next instance
+const pond1 = FilePond.create({
+  // element: document.getElementById('hidden-div1'),
+  name: 'filter1',
 
   //filter
   allowImageFilter: true,
   imageFilterColorMatrix: [
-    0.299,
-    0.587,
-    0.114,
-    0,
-    0,
-    0.299,
-    0.587,
-    0.114,
-    0,
-    0,
-    0.299,
-    0.587,
-    0.114,
-    0,
-    0,
-    0.0,
-    0.0,
-    0.0,
-    1,
-    0,
-  ],
-  credits: false
+    0.299, 0.587, 0.114, 0, 0,
+    0.299, 0.587, 0.114, 0, 0,
+    0.299, 0.587, 0.114, 0, 0,
+    0.0, 0.0, 0.0, 1, 0,
+  ]
 })
-// next instance
-//FilePond.create({ element: document.getElementById('hidden-div') })
+
+
+const pond2 = FilePond.create({
+  // element: document.getElementById('hidden-div2'),
+  name: 'filter2',
+
+  //filter
+  allowImageFilter: true,
+  imageFilterColorMatrix: [
+    1.000,  0.000,  0.000,  0.000,  0.800,
+    0.200,  0.200,  0.300,  0.000,  0.000,
+    0.100,  0.000,  0.000,  0.000,  0.200,
+    0.000,  0.000,  0.000,  1.000,  0.000
+  ]
+})
+const pond3 = FilePond.create({
+  // element: document.getElementById('hidden-div3'),
+  name: 'filter3',
+
+  //filter
+  allowImageFilter: true,
+  imageFilterColorMatrix: [
+    0.600,  0.000,  0.300,  0.000,  0.000,
+    0.200,  0.000,  0.400,  0.000, 0.000,
+    0.100,  0.000,  0.700,  0.000,  0.000,
+    0.000,  0.000,  0.000,  1.000,  0.000
+  ]
+})
+
+
 
 // Add it to the DOM
 const uploadArea = document.getElementById('uploadArea')
 uploadArea.appendChild(pond.element)
+// const hiddenArea = document.getElementById('hiddenArea')
 
 const uploadButton = document.createElement('button')
 uploadButton.innerHTML = 'Upload'
 uploadArea.appendChild(uploadButton)
 
 // THEORY
-// 1. click button - event handler:
-//     access image from pond and add to carousel
+// 1. click button -> event handler:
+//     Add pond to carousel
 
 const addImage = () => {
   const image = document.querySelector('canvas')
-  const slide = document.getElementById('carousel-slide01')
+  const slide = document.createElement('div')
+  const slideList = document.getElementsByClassName('splide__list')
+  slide.classList.add('splide__slide')
   if (!image) return
   slide.appendChild(image)
+  slideList.appendChild(slide)
 
 }
 
@@ -72,14 +94,11 @@ uploadButton.addEventListener ('click', () => {
   addImage()
   const uploadArea = document.getElementById('uploadArea')
   uploadArea.classList.add('hidden')
+  //show download button
+  const downloadButton = document.createElement('button')
+  dowmloadButton.innerHTML = 'Download Image'
+  uploadArea.appendChild(downloadButton)
 
-  // const slideDiv = document.createElement('div')
-  // console.log(slideDiv)
-  // const slideEl = document.createElement('img')
-  // console.log(slideEl)
-  // slide.appendChild(slideDiv)
-  // slideDiv.appendChild(slideEl)
-  // slideEl.appendChild(image)
 })
 
 
@@ -109,6 +128,10 @@ const loadImages  = () => {
 loadImages()
 
 //Wie kann ich mehrere Instances=Images mit Filtern erzeugen?
+
+
+
+
 
 
 // carousel

@@ -37,6 +37,19 @@ body {
   display: none!important;
 }
 
+#hidden-div1 {
+  display: none;
+}
+
+#hidden-div2 {
+  display: none;
+}
+
+#hidden-div3 {
+  display: none;
+}
+
+
 @media (min-width: 30em) {
   .filepond--item {
     width: calc(50% - 0.5em);
