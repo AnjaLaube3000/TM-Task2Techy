@@ -1,32 +1,33 @@
-//upload
-import * as FilePond from 'filepond'
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
-import FilePondPluginImageFilter from 'filepond-plugin-image-filter'
 // carousel
 import Splide from '@splidejs/splide'
 
-//upload
+// filepond
+import * as FilePond from 'filepond'
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
+import FilePondPluginImageFilter from 'filepond-plugin-image-filter'
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+
+// filepond
 FilePond.registerPlugin(
   FilePondPluginImagePreview,
-  FilePondPluginImageFilter
+  FilePondPluginImageFilter,
+  FilePondPluginFileValidateType
 )
 
-// Create a upload component
+// Create a FilePond instance
 const pond = FilePond.create({
   name: 'filepond',
   allowImagePreview: true,
   imagePreviewMaxHeight: 200,
-  // allowProcess: true,
-  // storeAsFile: true,
   credits: false,
+  acceptedFileTypes: ['image/*']
 })
 
-// next instance
+// Filter instances of FilePond.
+// Not connected to pond(original instance)
 const pond1 = FilePond.create({
   // element: document.getElementById('hidden-div1'),
   name: 'filter1',
-
-  //filter
   allowImageFilter: true,
   imageFilterColorMatrix: [
     0.299, 0.587, 0.114, 0, 0,
@@ -35,13 +36,10 @@ const pond1 = FilePond.create({
     0.0, 0.0, 0.0, 1, 0,
   ]
 })
-pond1.addFile(pond)
 
 const pond2 = FilePond.create({
   // element: document.getElementById('hidden-div2'),
   name: 'filter2',
-
-  //filter
   allowImageFilter: true,
   imageFilterColorMatrix: [
     1.000,  0.000,  0.000,  0.000,  0.800,
@@ -50,13 +48,10 @@ const pond2 = FilePond.create({
     0.000,  0.000,  0.000,  1.000,  0.000
   ]
 })
-pond2.addFile(pond)
 
 const pond3 = FilePond.create({
   // element: document.getElementById('hidden-div3'),
   name: 'filter3',
-
-  //filter
   allowImageFilter: true,
   imageFilterColorMatrix: [
     0.600,  0.000,  0.300,  0.000,  0.000,
@@ -65,19 +60,19 @@ const pond3 = FilePond.create({
     0.000,  0.000,  0.000,  1.000,  0.000
   ]
 })
-pond3.addFile(pond)
 
 
-// Add uploadArea to the DOM
+const carousel = document.getElementById('carousel')
 const uploadArea = document.getElementById('uploadArea')
+const downloadArea = document.getElementById('downloadArea')
+
+// Add uploadArea including UploadField(FilePond Instance) to the DOM
 uploadArea.appendChild(pond.element)
-// const hiddenArea = document.getElementById('hiddenArea')
 
-
-
-// Add upload Button to upload Area
+// Add uploadButton to uploadArea
 const uploadButton = document.createElement('button')
 uploadButton.innerHTML = 'Upload'
+uploadButton.classList.add('custom')
 uploadArea.appendChild(uploadButton)
 
 // THEORY
@@ -89,6 +84,7 @@ uploadArea.appendChild(uploadButton)
 const addImage = () => {
   const image = document.querySelector('canvas')
   const slide = document.createElement('div')
+  carousel.classList.remove('hidden')
   slide.classList.add('splide__slide')
   const slideList = document.getElementsByClassName('splide__list')[0]
   if (!image) return
@@ -96,90 +92,84 @@ const addImage = () => {
   slideList.appendChild(slide)
 }
 
+
+pond1.addFile(pond)
+console.log(pond1)
+
 //filters for original image
-const filters = []
-const addFilters = () => {
-  filters.push(pond1)
-  filters.push(pond2)
-  filters.push(pond3)
-  filters.forEach(() => {
-    addImage()
-  })
-}
-
-
+// const filters = []
+// const addFilters = () => {
+//   filters.push(pond1)
+//   filters.push(pond2)
+//   filters.push(pond3)
+//   filters.forEach(() => {
+//     addImage()
+//   })
+// }
 
 uploadButton.addEventListener ('click', () => {
   addImage()
-  addFilters()
+  // addFilters()
+
   const carousel = document.getElementById('carousel')
   carousel.classList.remove('hidden')
+
   const uploadArea = document.getElementById('uploadArea')
   uploadArea.classList.add('hidden')
+
   //show download area
-  const downloadArea = document.getElementById('downloadArea')
   downloadArea.classList.remove('hidden')
 })
 
 //restart programm --- Doenst work (pond needs to be restarted(preview image removed))
 const restartButton = document.getElementById('restart')
 
-const newPond = FilePond.create({
-  name: 'filepond',
-  allowImagePreview: true,
-  imagePreviewMaxHeight: 200,
-  // allowProcess: true,
-  // storeAsFile: true,
-  credits: false,
-})
-
 restartButton.addEventListener ('click', () => {
+  // FilePond.destroy(pond.element) -- geht aus irgendeinem Grund nicht
+
+  const carousel = document.getElementById('carousel')
+  carousel.classList.add('hidden')
+
+  const uploadArea = document.getElementById('uploadArea')
   uploadArea.classList.remove('hidden')
-  uploadArea.appendChild(newPond)
+
   const downloadArea = document.getElementById('downloadArea')
   downloadArea.classList.add('hidden')
 })
 
 
-// How to save the image to localStorage??
-let allImages = []
-allImages.push(pond)
+// // How to save the image to localStorage??
+// let allImages = []
+// allImages.push(pond)
 
-const savedImages = () => {
-  localStorage.setItem('allImages', JSON.stringify(allImages))
-}
+// const savedImages = () => {
+//   localStorage.setItem('allImages', JSON.stringify(allImages))
+// }
 
-savedImages()
-
-
-// Read existing images from localStorage
-const loadImages  = () => {
-  const imagesJSON = localStorage.getItem('allImages')
-
-  try {
-    return imagesJSON ? JSON.parse(imagesJSON) : []
-  } catch (e) {
-    return []
-  }
-}
-
-loadImages()
-
-//Wie kann ich mehrere Instances=Images mit Filtern erzeugen?
+// savedImages()
 
 
+// // Read existing images from localStorage
+// const loadImages  = () => {
+//   const imagesJSON = localStorage.getItem('allImages')
+
+//   try {
+//     return imagesJSON ? JSON.parse(imagesJSON) : []
+//   } catch (e) {
+//     return []
+//   }
+// }
+
+// loadImages()
 
 
-
-
-// carousel
+//Carousel
 document.addEventListener('DOMContentLoaded', () => {
 
   let basicOptions = {
     type: 'loop',
     perPage: 3,
     perMove: 1,
-    // rewind: true,
     speed: 1000,
     interval: 1000 * 5,
     autoplay: true,
@@ -188,7 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
     width: 900,
     fixedHeight: '20rem',
     cover: true,
-    // heightRatio: 0.45,
     gap: 25,
     padding: {
       left: '3rem',
@@ -206,8 +195,3 @@ document.addEventListener('DOMContentLoaded', () => {
   let carousel = new Splide('#carousel', basicOptions);
   carousel.mount()
 })
-
-
-
-
-
