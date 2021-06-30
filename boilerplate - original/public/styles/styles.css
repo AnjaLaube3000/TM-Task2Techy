@@ -1,5 +1,10 @@
 /* @import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'; */
 
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
 body {
   background-color: #080666!important;
   color: #E5E5E5!important;
@@ -20,6 +25,18 @@ body {
   width: calc(50% - 0.5em);
 }
 
+.filepond--file-action-button {
+  cursor: pointer;
+}
+
+.filepond--drop-label {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none!important;
+}
+
 @media (min-width: 30em) {
   .filepond--item {
     width: calc(50% - 0.5em);
@@ -32,10 +49,3 @@ body {
   }
 }
 
-.filepond--file-action-button {
-  cursor: pointer;
-}
-
-.filepond--drop-label {
-  cursor: pointer;
-}

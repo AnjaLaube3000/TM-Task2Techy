@@ -16,24 +16,12 @@
 } */
 
 
-html {
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-}
-
 
 #carousel {
-  width: 800px;
-  height: 350px;
+padding-top: 30px;
 }
-
-/* .splide__slide {
-  width: '100vw'!important;
-}
-*/
 
 .splide {
-  /* height: 588px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,5 +32,17 @@ html {
   border: none!important;
 }
 
+/*  arrows  */
+/* .splide__arrows {
+} */
+
+.splide__arrow--prev {
+  background-color: transparent;
+  border: none;
+}
+
+.splide__arrow--prev svg path{
+  color: lightcoral;
+}
 
 /*  responsiveness  */
