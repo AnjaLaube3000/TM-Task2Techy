@@ -24,37 +24,10 @@ const pond = FilePond.create({
 })
 
 
-//Wie bekomme ich die URL des canvas?
-// THEORY:
-// 1. pond auf server laden
-// 2. pond wieder herunterladen --> jetzt habe ich die URL!?
-// 3. pond1.addFile('./my-file.jpg');
-//    pond2.addFile('./my-file.jpg');
-//    pond3.addFile('./my-file.jpg');
-
-
-//1. pond auf server laden
-let allImages = []
-allImages.push(pond)
-
-const savedImages = () => {
-  localStorage.setItem('allImages', JSON.stringify(allImages))
-}
-
-savedImages()
-
-
-//ODER
-// const image = document.querySelector('canvas')
-// pond1.addFile('data:image/jpeg; base64,image')
-// image / jpeg, image / png, and image / svg + xml
-
-
 
 // Filter instances of FilePond.
-// Not connected to pond(original instance)
 const pond1 = FilePond.create({
-  // element: document.getElementById('hidden-div1'),
+  element: document.getElementById('hidden-div'),
   name: 'filter1',
   allowImageFilter: true,
   imageFilterColorMatrix: [
@@ -66,9 +39,8 @@ const pond1 = FilePond.create({
 })
 
 
-
 // const pond2 = FilePond.create({
-//   // element: document.getElementById('hidden-div2'),
+//   element: document.getElementById('hidden-div2'),
 //   name: 'filter2',
 //   allowImageFilter: true,
 //   imageFilterColorMatrix: [
@@ -80,7 +52,7 @@ const pond1 = FilePond.create({
 // })
 
 // const pond3 = FilePond.create({
-//   // element: document.getElementById('hidden-div3'),
+//   element: document.getElementById('hidden-div3'),
 //   name: 'filter3',
 //   allowImageFilter: true,
 //   imageFilterColorMatrix: [
@@ -150,6 +122,7 @@ uploadButton.addEventListener ('click', () => {
 //restart programm --- Doenst work (pond needs to be restarted(preview image removed))
 restartButton.addEventListener ('click', () => {
   // FilePond.destroy(pond.element) -- geht aus irgendeinem Grund nicht
+  pond.removeFiles()
 
   const carousel = document.getElementById('carousel')
   carousel.classList.add('hidden')

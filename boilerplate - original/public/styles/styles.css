@@ -65,17 +65,10 @@ transition: ease 0.3s;
   align-items: center;
 }
 
-/* #hidden-div1 {
+#hidden-div {
   display: none;
 }
 
-#hidden-div2 {
-  display: none;
-}
-
-#hidden-div3 {
-  display: none;
-} */
 
 
 @media (min-width: 30em) {
