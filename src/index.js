@@ -83,7 +83,7 @@ uploadArea.appendChild(pond.element)
 
 // Add instances to hidden div to the DOM
 const hiddenDiv = document.getElementById('hidden-div')
-// hiddenDiv.classList.add('hidden')
+// hiddenDiv.classList.add('hidden') --> when hidden, images w/filters don't show up in carousel
 hiddenDiv.appendChild(pond1.element)
 hiddenDiv.appendChild(pond2.element)
 hiddenDiv.appendChild(pond3.element)
@@ -91,20 +91,19 @@ hiddenDiv.appendChild(pond3.element)
 
 // method to add selected image to slider
 const addImage = (image) => {
-  // if (!image) return
   const slide = document.createElement('div')
   carousel.classList.remove('hidden')
   slide.classList.add('splide__slide')
   slide.appendChild(image)
   carouselSplide.add(slide)
-  // hiddenDiv.classList.add('hidden')
+  hiddenDiv.classList.add('hidden')
 }
 
 
 // UploadButton (DOM and functionality)
 const uploadButton = document.createElement('button')
 uploadButton.innerHTML = 'Upload'
-uploadButton.classList.add('custom')
+uploadButton.classList.add('upload')
 uploadArea.appendChild(uploadButton)
 
 uploadButton.addEventListener('click', () => {
@@ -121,6 +120,14 @@ uploadButton.addEventListener('click', () => {
 
   downloadArea.classList.remove('hidden')
 })
+
+// Download selected image - doenst work with multiple images in slider
+// downloadButton.addEventListener(('click'), () => {
+//   const link = document.createElement('a')
+//   link.download = 'image.png'
+//   link.href = document.querySelector('canvas').toDataURL()
+//   link.click()
+// })
 
 
 //restart programm --- Doenst work (pond needs to be restarted(preview image removed))
