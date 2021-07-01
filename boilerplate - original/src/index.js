@@ -83,7 +83,7 @@ uploadArea.appendChild(pond.element)
 
 // Add instances to hidden div to the DOM
 const hiddenDiv = document.getElementById('hidden-div')
-hiddenDiv.classList.add('hidden')
+// hiddenDiv.classList.add('hidden')
 hiddenDiv.appendChild(pond1.element)
 hiddenDiv.appendChild(pond2.element)
 hiddenDiv.appendChild(pond3.element)
@@ -97,7 +97,7 @@ const addImage = (image) => {
   slide.classList.add('splide__slide')
   slide.appendChild(image)
   carouselSplide.add(slide)
-  hiddenDiv.classList.add('hidden')
+  // hiddenDiv.classList.add('hidden')
 }
 
 
