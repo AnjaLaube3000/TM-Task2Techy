@@ -73,6 +73,7 @@ pond.on('addfile', () => {
 const carousel = document.getElementById('carousel')
 const uploadArea = document.getElementById('uploadArea')
 const downloadArea = document.getElementById('downloadArea')
+const downloadButton = document.getElementById('download')
 const restartButton = document.getElementById('restart')
 let carouselSplide
 
@@ -120,6 +121,19 @@ uploadButton.addEventListener ('click', () => {
   uploadArea.classList.add('hidden')
 
   downloadArea.classList.remove('hidden')
+})
+
+
+// // download selected image
+// click event on splide_slide on Focus/in Center
+downloadButton.addEventListener(('click'), () => {
+  // const downloadArea = document.getElementById('downloadArea')
+  const link = document.createElement('a')
+  link.download = 'filename.png'
+  link.href = document.querySelector('canvas').toDataURL()
+  link.click()
+  // let chosenImage = document.getElementById('carousel-slide01').toDataURL()
+  // chosenImage.click()
 })
 
 
