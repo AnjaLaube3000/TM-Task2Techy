@@ -23,6 +23,34 @@ const pond = FilePond.create({
   acceptedFileTypes: ['image/*']
 })
 
+
+//Wie bekomme ich die URL des canvas?
+// THEORY:
+// 1. pond auf server laden
+// 2. pond wieder herunterladen --> jetzt habe ich die URL!?
+// 3. pond1.addFile('./my-file.jpg');
+//    pond2.addFile('./my-file.jpg');
+//    pond3.addFile('./my-file.jpg');
+
+
+//1. pond auf server laden
+let allImages = []
+allImages.push(pond)
+
+const savedImages = () => {
+  localStorage.setItem('allImages', JSON.stringify(allImages))
+}
+
+savedImages()
+
+
+//ODER
+// const image = document.querySelector('canvas')
+// pond1.addFile('data:image/jpeg; base64,image')
+// image / jpeg, image / png, and image / svg + xml
+
+
+
 // Filter instances of FilePond.
 // Not connected to pond(original instance)
 const pond1 = FilePond.create({
@@ -37,49 +65,38 @@ const pond1 = FilePond.create({
   ]
 })
 
-const pond2 = FilePond.create({
-  // element: document.getElementById('hidden-div2'),
-  name: 'filter2',
-  allowImageFilter: true,
-  imageFilterColorMatrix: [
-    1.000,  0.000,  0.000,  0.000,  0.800,
-    0.200,  0.200,  0.300,  0.000,  0.000,
-    0.100,  0.000,  0.000,  0.000,  0.200,
-    0.000,  0.000,  0.000,  1.000,  0.000
-  ]
-})
 
-const pond3 = FilePond.create({
-  // element: document.getElementById('hidden-div3'),
-  name: 'filter3',
-  allowImageFilter: true,
-  imageFilterColorMatrix: [
-    0.600,  0.000,  0.300,  0.000,  0.000,
-    0.200,  0.000,  0.400,  0.000, 0.000,
-    0.100,  0.000,  0.700,  0.000,  0.000,
-    0.000,  0.000,  0.000,  1.000,  0.000
-  ]
-})
+
+// const pond2 = FilePond.create({
+//   // element: document.getElementById('hidden-div2'),
+//   name: 'filter2',
+//   allowImageFilter: true,
+//   imageFilterColorMatrix: [
+//     1.000,  0.000,  0.000,  0.000,  0.800,
+//     0.200,  0.200,  0.300,  0.000,  0.000,
+//     0.100,  0.000,  0.000,  0.000,  0.200,
+//     0.000,  0.000,  0.000,  1.000,  0.000
+//   ]
+// })
+
+// const pond3 = FilePond.create({
+//   // element: document.getElementById('hidden-div3'),
+//   name: 'filter3',
+//   allowImageFilter: true,
+//   imageFilterColorMatrix: [
+  //     0.600,  0.000,  0.300,  0.000,  0.000,
+  //     0.200,  0.000,  0.400,  0.000, 0.000,
+  //     0.100,  0.000,  0.700,  0.000,  0.000,
+  //     0.000,  0.000,  0.000,  1.000,  0.000
+  //   ]
+  // })
 
 
 const carousel = document.getElementById('carousel')
 const uploadArea = document.getElementById('uploadArea')
 const downloadArea = document.getElementById('downloadArea')
+const restartButton = document.getElementById('restart')
 
-// Add uploadArea including UploadField(FilePond Instance) to the DOM
-uploadArea.appendChild(pond.element)
-
-// Add uploadButton to uploadArea
-const uploadButton = document.createElement('button')
-uploadButton.innerHTML = 'Upload'
-uploadButton.classList.add('custom')
-uploadArea.appendChild(uploadButton)
-
-// THEORY
-// 1. click button -> event handler:
-//     Add pond to carousel
-// CHALLANGE
-// Add mutliple instances of pond to carousel
 
 const addImage = () => {
   const image = document.querySelector('canvas')
@@ -93,8 +110,16 @@ const addImage = () => {
 }
 
 
-pond1.addFile(pond)
-console.log(pond1)
+// Add uploadArea including UploadField(FilePond Instance) to the DOM
+uploadArea.appendChild(pond.element)
+
+
+// Add uploadButton to uploadArea
+const uploadButton = document.createElement('button')
+uploadButton.innerHTML = 'Upload'
+uploadButton.classList.add('custom')
+uploadArea.appendChild(uploadButton)
+
 
 //filters for original image
 // const filters = []
@@ -121,9 +146,8 @@ uploadButton.addEventListener ('click', () => {
   downloadArea.classList.remove('hidden')
 })
 
-//restart programm --- Doenst work (pond needs to be restarted(preview image removed))
-const restartButton = document.getElementById('restart')
 
+//restart programm --- Doenst work (pond needs to be restarted(preview image removed))
 restartButton.addEventListener ('click', () => {
   // FilePond.destroy(pond.element) -- geht aus irgendeinem Grund nicht
 
