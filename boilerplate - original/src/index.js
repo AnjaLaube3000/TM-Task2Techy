@@ -5,7 +5,7 @@ import Splide from '@splidejs/splide'
 import * as FilePond from 'filepond'
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import FilePondPluginImageFilter from 'filepond-plugin-image-filter'
-import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
 
 // filepond
 FilePond.registerPlugin(
@@ -19,15 +19,13 @@ const pond = FilePond.create({
   name: 'filepond',
   allowImagePreview: true,
   imagePreviewMaxHeight: 200,
-  credits: false,
-  acceptedFileTypes: ['image/*']
+  acceptedFileTypes: ['image/*'],
+  credits: false
 })
-
 
 
 // Filter instances of FilePond.
 const pond1 = FilePond.create({
-  element: document.getElementById('hidden-div'),
   name: 'filter1',
   allowImageFilter: true,
   imageFilterColorMatrix: [
@@ -38,75 +36,82 @@ const pond1 = FilePond.create({
   ]
 })
 
+const pond2 = FilePond.create({
+   name: 'filter2',
+   allowImageFilter: true,
+   imageFilterColorMatrix: [
+     1.000,  0.000,  0.000,  0.000,  0.800,
+     0.200,  0.200,  0.300,  0.000,  0.000,
+     0.100,  0.000,  0.000,  0.000,  0.200,
+     0.000,  0.000,  0.000,  1.000,  0.000
+   ]
+})
 
-// const pond2 = FilePond.create({
-//   element: document.getElementById('hidden-div2'),
-//   name: 'filter2',
-//   allowImageFilter: true,
-//   imageFilterColorMatrix: [
-//     1.000,  0.000,  0.000,  0.000,  0.800,
-//     0.200,  0.200,  0.300,  0.000,  0.000,
-//     0.100,  0.000,  0.000,  0.000,  0.200,
-//     0.000,  0.000,  0.000,  1.000,  0.000
-//   ]
-// })
+const pond3 = FilePond.create({
+   name: 'filter3',
+   allowImageFilter: true,
+   imageFilterColorMatrix: [
+     0.600,  0.000,  0.300,  0.000,  0.000,
+     0.200,  0.000,  0.400,  0.000, 0.000,
+     0.100,  0.000,  0.700,  0.000,  0.000,
+     0.000,  0.000,  0.000,  1.000,  0.000
+   ]
+ })
 
-// const pond3 = FilePond.create({
-//   element: document.getElementById('hidden-div3'),
-//   name: 'filter3',
-//   allowImageFilter: true,
-//   imageFilterColorMatrix: [
-  //     0.600,  0.000,  0.300,  0.000,  0.000,
-  //     0.200,  0.000,  0.400,  0.000, 0.000,
-  //     0.100,  0.000,  0.700,  0.000,  0.000,
-  //     0.000,  0.000,  0.000,  1.000,  0.000
-  //   ]
-  // })
+// all instances process same file
+pond.on('addfile', () => {
+  pond1.addFile(pond.getFile().file)
+  pond2.addFile(pond.getFile().file)
+  pond3.addFile(pond.getFile().file)
+  pond1.processFiles()
+  pond2.processFiles()
+  pond3.processFiles()
+})
 
 
+// Preselected DOM elements and variables
 const carousel = document.getElementById('carousel')
 const uploadArea = document.getElementById('uploadArea')
 const downloadArea = document.getElementById('downloadArea')
 const restartButton = document.getElementById('restart')
-
-
-const addImage = () => {
-  const image = document.querySelector('canvas')
-  const slide = document.createElement('div')
-  carousel.classList.remove('hidden')
-  slide.classList.add('splide__slide')
-  const slideList = document.getElementsByClassName('splide__list')[0]
-  if (!image) return
-  slide.appendChild(image)
-  slideList.appendChild(slide)
-}
+let carouselSplide
 
 
 // Add uploadArea including UploadField(FilePond Instance) to the DOM
 uploadArea.appendChild(pond.element)
 
 
-// Add uploadButton to uploadArea
+// Add instances to hidden div to the DOM
+const hiddenDiv = document.getElementById('hidden-div')
+hiddenDiv.classList.add('hidden')
+hiddenDiv.appendChild(pond1.element)
+hiddenDiv.appendChild(pond2.element)
+hiddenDiv.appendChild(pond3.element)
+
+
+// method to add selected image to slider
+const addImage = (image) => {
+  if (!image) return
+  const slide = document.createElement('div')
+  carousel.classList.remove('hidden')
+  slide.classList.add('splide__slide')
+  slide.appendChild(image)
+  carouselSplide.add(slide)
+  hiddenDiv.classList.add('hidden')
+}
+
+
+// UploadButton (DOM and functionality)
 const uploadButton = document.createElement('button')
 uploadButton.innerHTML = 'Upload'
 uploadButton.classList.add('custom')
 uploadArea.appendChild(uploadButton)
 
-
-//filters for original image
-// const filters = []
-// const addFilters = () => {
-//   filters.push(pond1)
-//   filters.push(pond2)
-//   filters.push(pond3)
-//   filters.forEach(() => {
-//     addImage()
-//   })
-// }
-
 uploadButton.addEventListener ('click', () => {
-  addImage()
-  // addFilters()
+  addImage(pond.element.querySelector('canvas'))
+  addImage(pond1.element.querySelector('canvas'))
+  addImage(pond2.element.querySelector('canvas'))
+  addImage(pond3.element.querySelector('canvas'))
 
   const carousel = document.getElementById('carousel')
   carousel.classList.remove('hidden')
@@ -114,14 +119,12 @@ uploadButton.addEventListener ('click', () => {
   const uploadArea = document.getElementById('uploadArea')
   uploadArea.classList.add('hidden')
 
-  //show download area
   downloadArea.classList.remove('hidden')
 })
 
 
 //restart programm --- Doenst work (pond needs to be restarted(preview image removed))
 restartButton.addEventListener ('click', () => {
-  // FilePond.destroy(pond.element) -- geht aus irgendeinem Grund nicht
   pond.removeFiles()
 
   const carousel = document.getElementById('carousel')
@@ -135,32 +138,8 @@ restartButton.addEventListener ('click', () => {
 })
 
 
-// // How to save the image to localStorage??
-// let allImages = []
-// allImages.push(pond)
 
-// const savedImages = () => {
-//   localStorage.setItem('allImages', JSON.stringify(allImages))
-// }
-
-// savedImages()
-
-
-// // Read existing images from localStorage
-// const loadImages  = () => {
-//   const imagesJSON = localStorage.getItem('allImages')
-
-//   try {
-//     return imagesJSON ? JSON.parse(imagesJSON) : []
-//   } catch (e) {
-//     return []
-//   }
-// }
-
-// loadImages()
-
-
-//Carousel
+// Carousel
 document.addEventListener('DOMContentLoaded', () => {
 
   let basicOptions = {
@@ -189,6 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
     accessibility: true
   }
 
-  let carousel = new Splide('#carousel', basicOptions);
-  carousel.mount()
+  carouselSplide = new Splide('#carousel', basicOptions)
+  carouselSplide.mount()
 })
