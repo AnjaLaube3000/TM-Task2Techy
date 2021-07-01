@@ -1,4 +1,4 @@
-# Thinkmoto Task2 - Tech Side
+# TM Task2 - Techy
 
 To get this running please:
 - download code to your local machine
